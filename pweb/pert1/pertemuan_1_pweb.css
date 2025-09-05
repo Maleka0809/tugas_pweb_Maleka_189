@@ -88,3 +88,22 @@ ol li img {
     padding: 20px;
 }
 
+h2 {
+    color: rgb(246, 255, 0);
+    font-weight: bold;
+    text-align: center;
+    text-shadow:  
+     -2px -2px 0 rgb(0, 0, 0),
+      2px -2px 0 rgb(0, 0, 0),
+     -2px  2px 0 rgb(0, 0, 0),
+      2px  2px 0 rgb(0, 0, 0);
+}
+
+.pertemuan2{
+    background-color: rgb(54, 54, 54);
+    background-color: rgb(54, 54, 54);
+    text-align: justify;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+}
