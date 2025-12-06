@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert10_PBO.css">
+</head>
+<body>
+    <h2>Testing dan Debugging</h2>
+
+<div class="isisemua">
+
+     <img class="gambar_1" src="output1.png" alt="gambar">
+<h3>1. Analisis Kode Program</h3>
+    <p>Kode program terdiri dari tiga kelas utama yang saling berinteraksi untuk mensimulasikan sistem komentar pada sebuah produk penjualan sederhana.</p>
+
+    <h3>A. Kelas Comment</h3>
+    <p>Kelas ini berfungsi sebagai struktur data untuk menyimpan detail sebuah ulasan.</p>
+    <ul>
+        <li><strong>Atribut:</strong> Menyimpan nama penulis (<code>author</code>), isi ulasan (<code>text</code>), dan nilai rating (<code>rating</code>).</li>
+        <li><strong>Fungsi:</strong> Menyediakan <em>getter</em> untuk mengakses data dan metode <code>printDetails()</code> untuk mencetak ulasan ke layar.</li>
+    </ul>
+
+    <h3>B. Kelas SalesItem</h3>
+    <p>Ini adalah kelas utama yang merepresentasikan produk.</p>
+    <ul>
+        <li><strong>Struktur Data:</strong> Menggunakan <code>ArrayList&lt;Comment&gt;</code> untuk menampung jumlah komentar yang dinamis (bisa bertambah terus).</li>
+        <li><strong>Logika Validasi:</strong> Pada method <code>addComment</code>, terdapat logika validasi (<em>Boundaries Check</em>). Komentar hanya akan disimpan jika rating berada dalam rentang <strong>1 hingga 5</strong>. Jika di luar itu, metode mengembalikan <code>false</code>.</li>
+    </ul>
+
+    <h3>C. Kelas SalesItemTest (Unit Testing)</h3>
+    <p>Kelas ini menggunakan kerangka kerja <strong>JUnit</strong> yang terintegrasi di BlueJ. Tujuannya adalah untuk mengotomatisasi pengujian logika tanpa harus menjalankannya secara manual berulang kali.</p>
+
+    <hr>
+
+    <h3>2. Laporan Pengujian (Testing)</h3>
+    <p>Pengujian dilakukan dengan dua metode: <strong>Automated Unit Testing</strong> dan <strong>Manual Testing</strong>.</p>
+
+    <h3>Skenario Pengujian</h3>
+    <p>Terdapat dua skenario utama yang diuji untuk memastikan validitas data:</p>
+    <ul>
+        <li>
+            <strong>Positive Case (Data Valid):</strong> Memasukkan rating 5.
+            <br><em>Ekspektasi:</em> Metode <code>addComment</code> mengembalikan <code>true</code> dan jumlah komentar bertambah 1.
+        </li>
+        <li>
+            <strong>Negative Case (Data Invalid):</strong> Memasukkan rating 6 (di luar batas).
+            <br><em>Ekspektasi:</em> Metode <code>addComment</code> mengembalikan <code>false</code> dan jumlah komentar tetap 0 (data ditolak).
+        </li>
+    </ul>
+
+    <h3>Hasil Pengujian</h3>
+    <ul>
+        <li><strong>Hasil Unit Test (JUnit):</strong>
+            <ul>
+                <li>Saat <code>SalesItemTest</code> dijalankan, BlueJ menampilkan <strong>Green Bar</strong> (Bar Hijau).</li>
+                <li>Ini menandakan bahwa <code>testAddComment</code> (kasus positif) dan <code>testInvalidRating</code> (kasus negatif) telah lolos asersi (<code>assertEquals</code> dan <code>assertTrue/False</code> sesuai).</li>
+            </ul>
+        </li>
+        <li><strong>Hasil Manual Test:</strong>
+            <ul>
+                <li>Objek <code>SalesItem</code> dibuat di <em>Object Bench</em>.</li>
+                <li>Pemanggilan <code>addComment("User", "Test", 6)</code> menghasilkan return <code>false</code>.</li>
+                <li>Pemanggilan <code>showInfo()</code> menunjukkan "Jumlah Komentar: 0".</li>
+                <li><strong>Kesimpulan:</strong> Logika validasi if-else berfungsi dengan benar.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h3>3. Proses Debugging</h3>
+    <img class="gambar_1" src="output2.png" alt="gambar">
+    <p>Proses debugging disiapkan untuk menangani potensi kesalahan logika (<em>logic error</em>) di mana program berjalan namun hasilnya salah.</p>
+
+    <h3>Metodologi Debugging</h3>
+    <p>Alat yang digunakan adalah <strong>BlueJ Debugger</strong>. Berikut adalah langkah simulasi penelusuran alur program:</p>
+    <ol>
+        <li><strong>Penempatan Breakpoint:</strong><br>
+            Sebuah <em>Stop Sign</em> (Breakpoint) ditempatkan pada baris <code>if(rating < 1 || rating > 5)</code> di dalam kelas <code>SalesItem</code>. Tujuannya untuk menghentikan program tepat sebelum validasi rating dieksekusi.
+        </li>
+        <li><strong>Inspeksi Variabel:</strong><br>
+            Saat metode dipanggil dengan input rating 6, program berhenti (<em>paused</em>). Panel debugger menunjukkan status variabel saat ini:
+            <ul>
+                <li><code>rating: 6</code></li>
+                <li><code>author: "Andi"</code></li>
+            </ul>
+        </li>
+        <li><strong>Stepping (Penelusuran):</strong><br>
+            Menggunakan tombol <strong>Step</strong>, alur program terlihat masuk ke dalam blok <code>if</code>. Ini mengonfirmasi bahwa kondisi <code>rating > 5</code> terpenuhi (bernilai <em>true</em>), sehingga program mengeksekusi perintah <code>return false</code>.
+        </li>
+        <li><strong>Verifikasi:</strong><br>
+            Proses ini memastikan bahwa blok kode pembuatan objek <code>new Comment(...)</code> dilewati/di-skip ketika rating salah, sehingga mencegah data sampah masuk ke dalam sistem.
+        </li>
+    </ol>
+
+    <hr>
+
+    <h3>4. Kesimpulan</h3>
+    <p>Berdasarkan hasil testing dan debugging:</p>
+    <ul>
+        <li>Kode <code>SalesItem</code> telah memiliki proteksi data yang baik terhadap input rating yang tidak valid.</li>
+        <li><code>ArrayList</code> berfungsi dengan baik dalam menyimpan objek <code>Comment</code>.</li>
+        <li>Unit Test mempermudah verifikasi fungsi setiap kali ada perubahan kode di masa depan (<em>Regression Testing</em>).</li>
+    </ul>
+
+     
+<p>berikut ini merupakan link kode saya: </p>
+<button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pertemuan_6">kode</a></button>
+</div>
+</body>
+</html>

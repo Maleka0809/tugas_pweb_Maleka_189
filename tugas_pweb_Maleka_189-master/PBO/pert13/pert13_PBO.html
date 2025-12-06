@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert13_PBO.css">
+</head>
+<body>
+    <h2>GUI</h2>
+
+<div class="isisemua">
+
+<p>Dokumen ini menjelaskan cara kerja sistem Login dan Image Viewer yang telah dibuat menggunakan Java Swing di BlueJ.</p>
+    
+    <hr>
+
+    <h3>1. Sistem Login (Class: Login.java)<h3>
+    <p>Bagian ini bertindak sebagai <strong>"Gerbang Utama"</strong>. Tugasnya memvalidasi apakah pengguna memiliki hak akses.</p>
+
+    <h3>A. Tampilan (GUI)</h3>
+    <ul>
+        <li><strong>GridLayout:</strong> Digunakan untuk menyusun label dan kolom input agar rapi seperti tabel (baris dan kolom).</li>
+        <li><strong>JPasswordField:</strong> Kolom khusus untuk kata sandi. Teks yang diketik otomatis berubah menjadi titik-titik atau bintang (*) untuk keamanan.</li>
+    </ul>
+
+    <h3>B. Logika Program (The Logic)</h3>
+    <ul>
+        <li>Program menyimpan data akun secara statis:
+            <ul>
+                <li>Username: <code>james3302</code></li>
+                <li>Password: <code>pass</code></li>
+            </ul>
+        </li>
+        <li>
+            Saat tombol <strong>Login</strong> ditekan:
+            <ol>
+                <li>Program mengambil input dari kolom username dan password.</li>
+                <li>Password diambil sebagai <em>array character</em>, lalu diubah menjadi String agar bisa dibandingkan.</li>
+                <li>Dilakukan pengecekan menggunakan <code>if-else</code>.</li>
+            </ol>
+        </li>
+        <li>
+            <strong>Jika Login Berhasil:</strong>
+            <ol>
+                <li>Muncul pesan "Login Granted".</li>
+                <li>Program membuat objek baru dari kelas gambar: <code>new ImageViewer().go();</code>.</li>
+                <li>Jendela Login ditutup menggunakan perintah <code>frame.dispose();</code> agar layar tidak penuh.</li>
+            </ol>
+        </li>
+    </ul>
+
+    <hr>
+
+    h3>2. Penampil Gambar (Class: ImageViewer.java)<h3>
+    <p>Bagian ini adalah fitur utama aplikasi yang berfungsi sebagai <strong>"Ruang Galeri"</strong>.</p>
+
+    <h3>A. Tampilan (GUI)</h3>
+    <ul>
+        <li><strong>JScrollPane:</strong> Fitur penggulung otomatis. Jika gambar yang dibuka ukurannya lebih besar dari layar, <em>scroll bar</em> akan muncul di samping.</li>
+        <li><strong>JLabel:</strong> Digunakan sebagai "kanvas" tempat gambar ditempelkan.</li>
+    </ul>
+
+    <h3>B. Logika Membuka File</h3>
+    <ul>
+        <li>Program menggunakan <code>JFileChooser</code> untuk membuka jendela pencarian file (seperti File Explorer).</li>
+        <li>Program akan "menunggu" (pause) sampai pengguna memilih file dan menekan tombol <strong>Open</strong>.</li>
+        <li>Setelah file dipilih, program mengambil alamat lokasi file tersebut (<em>path</em>).</li>
+        <li>File diubah menjadi objek gambar menggunakan <code>ImageIcon</code> dan ditampilkan ke layar.</li>
+    </ul>
+
+    <hr>
+
+    h3>3. Hubungan Antar Class (Konsep OOP)<h3>
+    <p>Dalam BlueJ, terlihat garis panah yang menghubungkan kotak <code>Login</code> ke <code>ImageViewer</code>.</p>
+    <ul>
+        <li>Ini disebut <strong>Dependency</strong> (Ketergantungan).</li>
+        <li>Class <code>Login</code> membutuhkan class <code>ImageViewer</code> untuk berjalan.</li>
+        <li>Tanpa <code>ImageViewer</code>, kode pada Login akan error karena tidak bisa memanggil halaman selanjutnya.</li>
+    </ul>
+
+    <hr>
+
+    h3>4. Ringkasan Alur Kerja<h3>
+    <p>Berikut adalah urutan kejadian saat aplikasi dijalankan:</p>
+    <ol>
+        <li>Program dijalankan &rarr; Muncul jendela <strong>Login</strong>.</li>
+        <li>User mengisi data &rarr; Klik tombol <strong>Login</strong>.</li>
+        <li>Validasi sukses &rarr; Objek <strong>ImageViewer</strong> dibuat (instansiasi).</li>
+        <li>Jendela Login hilang &rarr; Jendela <strong>Image Viewer</strong> muncul.</li>
+        <li>User klik <strong>Buka Gambar</strong> &rarr; Pilih file di komputer &rarr; Gambar tampil.</li>
+    </ol>
+
+
+<br>
+<p>berikut ini merupakan link kode saya: </p>
+<button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pertemuan_6">kode</a></button>
+</div>
+</body>
+</html>

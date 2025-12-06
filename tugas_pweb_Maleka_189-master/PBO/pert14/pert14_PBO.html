@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert14_PBO.css">
+</head>
+<body>
+    <h2>Game Pong</h2>
+
+<div class="isisemua">
+    <img class="gambar_1" src="output.png" alt="gambar">
+
+    <h3>Penjelasan Alur Kerja & Logika Game Pong</h3>
+        <h3>Bedah Kode Java Swing (OOP)</h3>
+    </center>
+
+    <hr>
+
+    <h3>1. Konsep Besar: Bagaimana Game Bekerja?</h3>
+    <p>
+        Game ini bekerja menggunakan prinsip animasi <strong>"Flipbook"</strong> (buku lipat). 
+        Komputer melakukan 4 langkah utama secara berulang-ulang dalam kecepatan tinggi (60 kali per detik):
+    </p>
+    <ol>
+        <li><strong>Input:</strong> Membaca tombol keyboard yang ditekan user.</li>
+        <li><strong>Update:</strong> Menggeser posisi koordinat (X, Y) bola dan raket.</li>
+        <li><strong>Cek Aturan:</strong> Memeriksa apakah terjadi tabrakan atau bola lewat batas (skor).</li>
+        <li><strong>Render:</strong> Menghapus layar lama dan menggambar ulang posisi baru.</li>
+    </ol>
+
+    <hr>
+
+    <h3>2. Bedah Struktur Kode (Class per Class)</h3>
+    <p>Berikut adalah fungsi spesifik dari setiap file dalam proyek ini:</p>
+
+    <table border="1" cellpadding="10" cellspacing="0" width="100%">
+        <thead>
+            <tr bgcolor="#eeeeee">
+                <th width="25%">Nama Class</th>
+                <th>Analogi & Fungsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>PongGame.java</strong><br><em>(The Trigger)</em></td>
+                <td>
+                    <strong>Analogi: Kunci Kontak Mobil.</strong><br>
+                    File ini sangat sederhana, hanya berisi <code>main method</code>. 
+                    Fungsinya hanya satu: menyalakan <code>GameFrame</code> agar program mulai berjalan.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>GameFrame.java</strong><br><em>(The Window)</em></td>
+                <td>
+                    <strong>Analogi: Bingkai Foto.</strong><br>
+                    Class ini membuat jendela aplikasi (tombol close, minimize, title bar). 
+                    Tugas utamanya adalah menampung (menempelkan) <code>GamePanel</code> di dalamnya.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>GamePanel.java</strong><br><em>(The Brain)</em></td>
+                <td>
+                    <strong>Analogi: Kanvas & Wasit.</strong><br>
+                    Ini adalah bagian tersibuk. Tugasnya:
+                    <ul>
+                        <li><strong>Menggambar:</strong> Menggunakan <code>Graphics</code> untuk melukis bola dan paddle.</li>
+                        <li><strong>Game Loop:</strong> Mengatur waktu agar game berjalan stabil di 60 FPS.</li>
+                        <li><strong>Collision (Tabrakan):</strong> Menentukan kapan bola harus memantul dan kapan reset.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Paddle.java</strong><br><em>(The Player)</em></td>
+                <td>
+                    <strong>Fitur Utama: ID Player.</strong><br>
+                    Objek ini memiliki variabel <code>id</code>.
+                    <ul>
+                        <li>Jika <code>id=1</code>: Hanya merespon tombol <strong>W</strong> dan <strong>S</strong>.</li>
+                        <li>Jika <code>id=2</code>: Hanya merespon tombol <strong>Panah Atas</strong> dan <strong>Bawah</strong>.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Ball.java</strong><br><em>(The Moving Object)</em></td>
+                <td>
+                    Objek bola yang memiliki logika pantulan dinding sederhana. 
+                    Bola memiliki method <code>getBounds()</code> yang membuat kotak imajiner untuk mendeteksi tabrakan dengan paddle.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>3. Memahami Sistem Koordinat Java</h3>
+    <p>
+        Dalam pemrograman GUI Java (Swing), titik koordinat <code>(0,0)</code> berada di <strong>Pojok Kiri Atas</strong> layar.
+    </p>
+    <ul>
+        <li><strong>Sumbu X (Horizontal):</strong> Semakin ke kanan, nilai semakin besar.</li>
+        <li><strong>Sumbu Y (Vertikal):</strong> Semakin ke <strong>bawah</strong>, nilai semakin besar.</li>
+    </ul>
+    
+    <p><strong>Contoh Logika Tabrakan:</strong></p>
+    <pre>
+// Jika Y bola <= 0, artinya bola menyentuh atap
+if (ball.y <= 0) {
+    ball.yVelocity = -ball.yVelocity; // Balik arah ke bawah
+}
+
+// Jika Y bola >= Tinggi Game, artinya bola menyentuh lantai
+if (ball.y >= GAME_HEIGHT - ball.diameter) {
+    ball.yVelocity = -ball.yVelocity; // Balik arah ke atas
+}
+    </pre>
+
+    <hr>
+
+    <h3>4. Alur Logika "Kalah"</h3>
+    <p>Bagaimana komputer tahu kalau Player kalah?</p>
+    <ol>
+        <li>Setiap detik, komputer mengecek posisi X bola (<code>ball.x</code>).</li>
+        <li>Jika <code>ball.x < 0</code> (Negatif/Lewat Kiri) &rarr; <strong>Player 1 Kalah</strong>.</li>
+        <li>Jika <code>ball.x > Lebar Layar</code> (Lewat Kanan) &rarr; <strong>Player 2 Kalah</strong>.</li>
+        <li>Jika salah satu kondisi terpenuhi, panggil fungsi <code>newBall()</code> untuk mereset bola ke tengah.</li>
+    </ol>
+
+    <H3> dokumentasi </H3>
+     <img class="gambar_1" src="output2.png" alt="gambar">
+      <img class="gambar_1" src="output3.png" alt="gambar">
+
+<p>berikut ini merupakan link kode saya: </p>
+<button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/1450c7e4eacec41abb9c5ff5d5cd58a500ee01d4/pert_14">kode</a></button>
+</div>
+</body>
+</html>

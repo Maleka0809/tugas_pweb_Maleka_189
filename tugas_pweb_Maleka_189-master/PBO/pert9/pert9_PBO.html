@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert9_PBO.css">
+</head>
+<body>
+    <h2>Membuat Game World of Zuul dengan JAVA</h2>
+
+<div class="isisemua">
+<img class="gambar_1" src="output2.png" alt="gambar">
+
+<h3>Penjelasan Kelas-kelas Game "World of Zuul"</h3>
+    <p>Ini adalah ringkasan fungsionalitas dari setiap file Java yang membentuk game petualangan berbasis teks sederhana.</p>
+    
+    <div class="class-explanation">
+        <h3> Ruangan.java</h3>
+        <p>Kelas ini merepresentasikan **satu lokasi** atau ruangan dalam dunia game.</p>
+        
+        <h3>Atribut Utama:</h3>
+        <ul>
+            <li><code>deskripsi</code> (String): Deskripsi singkat ruangan (misalnya, "di dalam pub kampus").</li>
+            <li><code>exits</code> (HashMap&lt;String, Ruangan&gt;): Struktur data yang menyimpan semua pintu keluar. Kunci (Key) adalah arah (String, seperti "utara"), dan Nilai (Value) adalah objek <code>Ruangan</code> tujuan.</li>
+        </ul>
+        
+        <h3>Fungsi Utama:</h3>
+        <ul>
+            <li><code>setExit(String direction, Ruangan neighbor)</code>: Menetapkan pintu keluar dari ruangan ini ke ruangan lain pada arah tertentu.</li>
+            <li><code>getExit(String direction)</code>: Mengembalikan objek <code>Ruangan</code> tujuan berdasarkan arah yang diberikan. Mengembalikan <code>null</code> jika tidak ada pintu keluar di arah tersebut.</li>
+            <li><code>getLongDescription()</code>: Mengembalikan deskripsi lengkap ruangan saat ini, termasuk daftar semua pintu keluar yang tersedia.</li>
+        </ul>
+        <div class="note">**Konsep Utama:** Kelas ini menggunakan <code>HashMap</code> untuk memodelkan pintu keluar, memungkinkan akses cepat ke ruangan berikutnya berdasarkan arah yang dimasukkan pemain.</div>
+    </div>
+
+    <div class="class-explanation">
+        <h3> Command.java</h3>
+        <p>Kelas ini menyimpan informasi tentang perintah yang dimasukkan oleh pengguna, yang terdiri dari maksimal dua kata.</p>
+
+        <h3>Atribut Utama:</h3>
+        <ul>
+            <li><code>perintah</code> (String): Kata perintah pertama (misalnya, "go", "help", "quit").</li>
+            <li><code>kalimat2</code> (String): Kata kedua dari perintah (biasanya parameter, seperti "utara" untuk "go utara").</li>
+        </ul>
+
+        <h3>Fungsi Utama:</h3>
+        <ul>
+            <li><code>isUnknown()</code>: Mengembalikan <code>true</code> jika kata perintah pertama (<code>perintah</code>) adalah <code>null</code>, yang menandakan perintah tidak valid.</li>
+            <li><code>hasSecondWord()</code>: Mengembalikan <code>true</code> jika perintah memiliki kata kedua.</li>
+            <li>Metode <code>getPerintah()</code> dan <code>getKalimat2()</code>: Digunakan untuk mengambil kata-kata perintah.</li>
+        </ul>
+    </div>
+    
+    <div class="class-explanation">
+        <h3> CommandWords.java</h3>
+        <p>Kelas ini bertugas menyimpan dan mengelola daftar semua kata perintah yang valid dalam game.</p>
+        
+        <h3>Atribut Utama:</h3>
+        <ul>
+            <li><code>VALID_COMMANDS</code> (<code>private static final String[]</code>): Array yang berisi daftar perintah yang diizinkan: **"go"**, **"quit"**, **"help"**, dan **"look"**.</li>
+        </ul>
+        
+        <h3>Fungsi Utama:</h3>
+        <ul>
+            <li><code>isCommand(String commandString)</code>: Memeriksa apakah sebuah string yang diberikan adalah salah satu perintah yang valid.</li>
+            <li><code>showAll()</code>: Mencetak semua perintah yang valid ke konsol.</li>
+        </ul>
+    </div>
+
+    <div class="class-explanation">
+        <h3> Parser.java</h3>
+        <p>Kelas ini bertanggung jawab untuk membaca masukan dari pengguna dan mengubahnya menjadi objek <code>Command</code> yang dapat diproses oleh game.</p>
+
+        <h3>Atribut Utama:</h3>
+        <ul>
+            <li><code>commands</code> (CommandWords): Objek yang digunakan untuk memeriksa validitas kata perintah.</li>
+            <li><code>reader</code> (Scanner): Digunakan untuk membaca masukan baris dari konsol (<code>System.in</code>).</li>
+        </ul>
+
+        <h3>Fungsi Utama:</h3>
+        <ul>
+            <li><code>getCommand()</code>: Fungsi inti.
+                <ul>
+                    <li>Membaca seluruh baris masukan pengguna.</li>
+                    <li>Memecah baris tersebut menjadi dua kata (kata pertama dan kata kedua).</li>
+                    <li>Menggunakan <code>commands.isCommand()</code> untuk memverifikasi kata pertama.</li>
+                    <li>Mengembalikan objek <code>Command</code> baru. Jika kata pertama tidak valid, ia mengembalikan objek <code>Command</code> dengan kata perintah <code>null</code> (sehingga <code>isUnknown()</code> akan bernilai <code>true</code>).</li>
+                </ul>
+            </li>
+            <li><code>showCommands()</code>: Meneruskan panggilan untuk menampilkan semua perintah yang valid.</li>
+        </ul>
+    </div>
+    
+    <div class="class-explanation">
+        <h3> Game.java</h3>
+        <p>Ini adalah **kelas utama** yang menjalankan logika permainan. Kelas ini menginisialisasi dunia game dan menangani perulangan utama (game loop).</p>
+        
+        <h3>Atribut Utama:</h3>
+        <ul>
+            <li><code>parser</code> (Parser): Objek untuk membaca dan menginterpretasikan perintah pengguna.</li>
+            <li><code>currentRoom</code> (Ruangan): Objek <code>Ruangan</code> tempat pemain berada saat ini.</li>
+        </ul>
+        
+        <h3>Fungsi Utama:</h3>
+        <ul>
+            <li><code>createRooms()</code>: Metode inisialisasi yang membuat semua objek <code>Ruangan</code> (outside, theater, pub, lab, office) dan menetapkan pintu keluar (menghubungkan ruangan-ruangan).</li>
+            <li><code>play()</code>: Metode yang memulai permainan. Ini mencetak pesan sambutan dan menjalankan perulangan <code>while</code> utama yang terus memproses perintah hingga permainan berakhir.</li>
+            <li><code>processCommand(Command command)</code>: Memeriksa kata perintah dan memanggil metode yang sesuai (<code>printHelp()</code>, <code>goRoom()</code>, <code>quit()</code>, <code>look()</code>).</li>
+            <li><code>goRoom(Command command)</code>: Memproses perintah "go". Mencari ruangan tujuan; jika ada, memperbarui <code>currentRoom</code> pemain dan mencetak deskripsi ruangan baru.</li>
+            <li><code>look()</code>: Memproses perintah "look" dengan mencetak deskripsi ruangan saat ini secara lengkap (menggunakan <code>currentRoom.getLongDescription()</code>).</li>
+        </ul>
+        <div class="note">Alur Game: Kelas <code>Game</code> adalah orkestrator yang menghubungkan semua komponen, <code>Parser</code> menerima masukan, <code>Command</code> menyimpan masukan, <code>CommandWords</code> memvalidasi, dan <code>Ruangan</code> memodelkan dunia.</div>
+    </div>
+
+    <h3> Screenshot Cara Bermain World of Zuul </h3>
+    <img class="gambar_1" src="output.png" alt="gambar">
+<br>
+<p>berikut ini merupakan link kode saya: </p>
+<button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pertemuan_6">kode</a></button>
+</div>
+</body>
+</html>

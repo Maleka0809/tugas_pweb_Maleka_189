@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert11_PBO.css">
+</head>
+<body>
+    <h2>Membuat Sistem Rental Mobil</h2>
+
+<div class="isisemua">
+     <img class="gambar_1" src="output.png" alt="gambar">
+ <h3>1. Konsep Utama (Teori OOP)</h3>
+
+    <h3>A. Inheritance (Pewarisan)</h3>
+    <ul>
+        <li><strong>Konsep:</strong> Membuat kelas baru berdasarkan kelas yang sudah ada.</li>
+        <li><strong>Penerapan:</strong> <code>Car</code>, <code>Truck</code>, dan <code>LuxuryCar</code> adalah anak dari <code>Vehicle</code>.</li>
+        <li><strong>Manfaat:</strong> Tidak perlu tulis ulang variabel <code>model</code> dan <code>baseRate</code>. Cukup tulis di induk, anak otomatis mewarisi.</li>
+    </ul>
+
+    <h3>B. Abstraction (Abstraksi)</h3>
+    <ul>
+        <li><strong>Konsep:</strong> Menyembunyikan detail implementasi.</li>
+        <li><strong>Penerapan:</strong> Kelas <code>Vehicle</code> adalah <code>abstract</code>.</li>
+        <li><strong>Alasan:</strong> Di dunia nyata tidak ada benda bernama sekadar "Kendaraan". Harus spesifik. Kita melarang pembuatan objek <code>new Vehicle()</code>.</li>
+    </ul>
+
+    <h3>C. Overriding (Menimpa)</h3>
+    <ul>
+        <li><strong>Konsep:</strong> Mengubah perilaku metode warisan.</li>
+        <li><strong>Penerapan:</strong> Metode <code>calculateRentalCost</code> di Vehicle kosong, tapi di Truck diisi rumus khusus.</li>
+        <li><strong>Manfaat:</strong> Setiap anak punya cara hitung sendiri meski nama metodenya sama.</li>
+    </ul>
+
+    <h3>D. Polymorphism (Polimorfisme)</h3>
+    <ul>
+        <li><strong>Konsep:</strong> Satu variabel berubah bentuk jadi banyak jenis objek.</li>
+        <li><strong>Penerapan:</strong> Di <code>RentalSystem</code>, variabel bertipe <code>Vehicle</code> bisa berisi <code>Car</code>, <code>Truck</code>, atau <code>LuxuryCar</code>.</li>
+    </ul>
+
+    <hr>
+
+    <!-- BAGIAN 2 -->
+    <h3>2. Bedah Kode (Per File)</h3>
+
+    <h3>File 1: Vehicle.java (Induk)</h3>
+    <pre><code>
+public abstract class Vehicle {
+    protected String model;
+    
+    public abstract double calculateRentalCost(int days);
+}
+    </code></pre>
+    <p><strong>Penjelasan:</strong></p>
+    <ul>
+        <li><code>abstract class</code>: Menandakan kelas ini tidak bisa dibuat objeknya (hanya cetakan dasar).</li>
+        <li><code>protected</code>: Agar variabel aman tapi tetap bisa diakses oleh anak kelas (Car/Truck).</li>
+        <li><code>abstract method</code>: "Metode Kosong" yang <strong>memaksa</strong> semua anak kelas untuk membuat rumus perhitungan sendiri.</li>
+    </ul>
+
+    <h3>File 2, 3, 4: Kelas Anak (Car, Truck, LuxuryCar)</h3>
+    <pre><code>
+public class Truck extends Vehicle {
+    // ... constructor ...
+
+    @Override
+    public double calculateRentalCost(int days) {
+        return (baseRate * days) + heavyDutyFee;
+    }
+}
+    </code></pre>
+    <p><strong>Poin Penting:</strong></p>
+    <ul>
+        <li><code>extends Vehicle</code>: Kata kunci sakti untuk Pewarisan.</li>
+        <li><code>super(...)</code>: Memanggil constructor orang tua ("Titip simpan data ini").</li>
+        <li><code>@Override</code>: Penanda kita memodifikasi metode orang tua dengan rumus unik (misal: tambah biaya berat).</li>
+    </ul>
+
+    <h3>File 5: RentalSystem.java (Otak Program)</h3>
+
+    <h4>Bagian 1: Polimorfisme (Persiapan)</h4>
+    <pre><code>Vehicle kendaraanTerpilih = null;</code></pre>
+    <p>Kita menyiapkan satu variabel kosong bertipe <code>Vehicle</code>. Ini ibarat "Kardus Kosong berlabel Kendaraan".</p>
+
+    <h4>Bagian 2: Logika Pemilihan</h4>
+    <pre><code>
+if (pilihan == 1) { 
+    kendaraanTerpilih = car; 
+} else if (pilihan == 2) { 
+    kendaraanTerpilih = truck; 
+}
+    </code></pre>
+    <p>Tergantung input user, "Kardus" tadi akan diisi benda yang berbeda (Mobil atau Truk).</p>
+
+    <h4>Bagian 3: Eksekusi Ajaib</h4>
+    <pre><code>double total = kendaraanTerpilih.calculateRentalCost(hari);</code></pre>
+    <p>Saat baris ini jalan, Java mengecek: <em>"Benda apa di dalam kardus?"</em></p>
+    <ul>
+        <li>Jika isinya <strong>Truck</strong>, rumus Truck yang jalan.</li>
+        <li>Jika isinya <strong>Car</strong>, rumus Car yang jalan.</li>
+    </ul>
+
+    <hr>
+
+    <!-- BAGIAN 3 -->
+    <h3>3. Alur Jalan Program (Runtime Flow)</h3>
+     <img class="gambar_1" src="output2.png" alt="gambar">
+    <ol>
+        <li>
+            <strong>Start & Display:</strong> Program menyiapkan data mobil di memori dan menampilkan menu 1, 2, 3.
+        </li>
+        <li>
+            <strong>User Input:</strong> User memilih <strong>"2" (Truk)</strong> dan durasi <strong>"3 hari"</strong>.
+        </li>
+        <li>
+            <strong>Process (Polimorfisme):</strong> Variabel <code>kendaraanTerpilih</code> diisi objek Truck. Program memanggil rumus Truk: <code>(800rb * 3) + 150rb</code>.
+        </li>
+        <li>
+            <strong>Output:</strong> Total biaya Rp 2.550.000 ditampilkan ke layar.
+        </li>
+    </ol>
+<br>
+<p>berikut ini merupakan link kode saya: </p>
+<button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pertemuan_6">kode</a></button>
+</div>
+</body>
+</html>
