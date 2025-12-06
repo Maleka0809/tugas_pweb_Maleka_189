@@ -4,27 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link rel="stylesheet" href="pert7_PBO.css">
+<link rel="stylesheet" href="pert12_PBO.css">
 </head>
 <body>
-    <h2>Membuat Personal Organize</h2>
+    <h2>Abstract Class</h2>
 
 <div class="isisemua">
-<p>Kali ini saya diberikan tugas oleh pak fajar untuk membuat kode untuk menjawab otomatis atau techsuppor dengan menggunakan bahasa Java.</p>
+    <img class="gambar_1" src="output.png" alt="gambar">
+<h3>1. Penjelasan Konsep: Analogi Bos dan Bawahan</h3>
+    <p>
+        <strong>Abstract Class</strong> mirip seperti <strong>"Template Dasar"</strong> atau aturan main dari Bos di sebuah perusahaan.
+        Kita tidak bisa membuat objek langsung dari Abstract Class (Bos), tapi kita membuat objek dari kelas turunannya (Bawahan).
+    </p>
+    <p>
+        Dalam kode ini:
+    </p>
+    <ul>
+        <li><strong>Abstract Class (MakhlukHidup):</strong> Adalah konsep. Tidak bisa dibuat objeknya (dilarang pakai <code>new MakhlukHidup()</code>).</li>
+        <li><strong>Concrete Class (Manusia, Hewan, Tumbuhan):</strong> Adalah bentuk nyata yang bisa dibuat objeknya.</li>
+    </ul>
 
-<ol>
-<li>
-    <p>pertama-tama saya membuat kode nya di bluej terlebih dahulu dengan menambahkan 10 response put.</p>
-    <p>di tugas kali ini saya hanya membuat dengan 1 class.</p>
-    <img class="gambar_1" src="tambah10.png" alt="gambar">
-</li>
-<br/>
-<li>
-<p>berikut merupakan bagian output dari kode saya. dibagian get response pada kode saya itu bisa diibaratkan sebagai input jika kata dari kalimat yang ada di get response tersebut ada yang sama dengan kalimat kunci pada hash map maka akan keluar bagian nilai atau jawabnya</p>
-<img class="gambar_1" src="output.png" alt="gambar">
-</li>
+    <hr>
 
-</ol>
+    <h3>2. Bedah Logika Kode</h3>
+    
+    <h3>A. Aturan dari Bos (Abstract Class)</h3>
+    <p>Class <code>MakhlukHidup</code> memberikan dua jenis perintah:</p>
+    <ul>
+        <li><strong>Abstract Method (<code>berdiri()</code>):</strong> Aturan wajib tanpa contoh. Bos bilang: <em>"Kalian WAJIB bisa berdiri, tapi caranya terserah kalian!"</em>.</li>
+        <li><strong>Concrete Method (<code>oksigen()</code>):</strong> Fitur gratis. Bos bilang: <em>"Ini fitur bernapas, kalian tinggal pakai saja."</em></li>
+    </ul>
+
+    <h3>B. Kepatuhan Bawahan (Subclass)</h3>
+    <p>Karena Bos mewajibkan method <code>berdiri()</code>, maka:</p>
+    <ul>
+        <li><strong>Manusia</strong> menulis kode: <em>"Saya berdiri pakai 2 kaki."</em></li>
+        <li><strong>Hewan</strong> menulis kode: <em>"Saya berdiri pakai 4 kaki."</em></li>
+        <li><strong>Tumbuhan</strong> menulis kode: <em>"Saya berdiri pakai akar."</em></li>
+    </ul>
+
+    <hr>
+
+    <h3>3. Source Code Lengkap (MainMakhlukHidup.java)</h3>
+    <p>Berikut adalah kode program Java yang sudah digabung menjadi satu file.</p>
+
+    <pre>
+/*
+ * FILE: MainMakhlukHidup.java
+ * Penjelasan: Implementasi Abstract Class tanpa CSS/JS
+ */
+
+// 1. ABSTRACT CLASS (Induk)
+abstract class MakhlukHidup {
+   
+   // Abstract Method: Wajib diisi (override) oleh anak-anaknya
+   // Tidak ada body {} karena ini cuma aturan.
+   public abstract void berdiri();
+   
+   // Concrete Method: Method biasa yang sudah ada isinya
+   // Anak-anaknya tinggal pakai (warisan).
+   public void oksigen(){
+       System.out.println("- butuh Makanan");
+       System.out.println("- butuh oksigen");
+       System.out.println("- butuh air");
+   }     
+}
+
+// 2. SUBCLASS MANUSIA
+class Manusia extends MakhlukHidup {
+    private String duaKaki;
+    
+    public Manusia(String duaKaki){
+        this.duaKaki = duaKaki;
+    }
+    
+    // Wajib Override method 'berdiri'
+    @Override
+    public void berdiri(){
+        System.out.println("Manusia berdiri menggunakan :  " + duaKaki);
+    }
+}
+
+// 3. SUBCLASS HEWAN
+class Hewan extends MakhlukHidup {
+    private String kakiEmpat, kakiDua;
+    
+    public Hewan(String kakiEmpat, String kakiDua){
+        this.kakiEmpat = kakiEmpat;
+        this.kakiDua   = kakiDua;
+    }
+    
+    // Wajib Override method 'berdiri'
+    @Override
+    public void berdiri(){
+        System.out.println("Kambing berdiri menggunakan :  " + kakiEmpat);
+        System.out.println("Ayam berdiri menggunakan    :  " + kakiDua);
+    }    
+}
+
+// 4. SUBCLASS TUMBUHAN
+class Tumbuhan extends MakhlukHidup {
+    private String Akar;
+    
+    public Tumbuhan(String Akar){
+        this.Akar = Akar;
+    }
+    
+    // Wajib Override method 'berdiri'
+    @Override
+    public void berdiri(){
+        System.out.println("Tumbuhan berdiri dengan     :  " + Akar);
+    }
+}
+
+// 5. MAIN CLASS (Untuk Menjalankan)
+public class MainMakhlukHidup {
+    
+    // Polimorfisme: Menerima 'MakhlukHidup' jenis apa saja
+    public void cekMakhlukHidup(MakhlukHidup mHidup){
+        mHidup.berdiri(); // Menjalankan cara berdiri masing-masing
+        mHidup.oksigen(); // Menjalankan fitur umum
+    }
+    
+    public static void main(String[] args) {
+        MainMakhlukHidup tMakhlukHidup = new MainMakhlukHidup();        
+        
+        System.out.println("=== HASIL OUTPUT ===");
+        
+        // Cek Manusia
+        tMakhlukHidup.cekMakhlukHidup(new Manusia("Dua Kaki"));       
+        System.out.println("-----------------------------------------");                              
+        
+        // Cek Hewan
+        tMakhlukHidup.cekMakhlukHidup(new Hewan("Empat Kaki", "Dua Kaki"));
+        System.out.println("-----------------------------------------");        
+        
+        // Cek Tumbuhan
+        tMakhlukHidup.cekMakhlukHidup(new Tumbuhan("Akar"));
+    }
+}
+    </pre>
+
+    <img class="gambar_1" src="output2.png" alt="gambar">
 <br>
 <p>berikut ini merupakan link kode saya: </p>
 <button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pertemuan_6">kode</a></button>
