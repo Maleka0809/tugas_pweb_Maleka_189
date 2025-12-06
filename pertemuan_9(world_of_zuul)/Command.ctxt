@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Command
+comment0.text=\r\n\ Kelas\ Command\ menyimpan\ informasi\ tentang\ perintah\ yang\ dimasukkan\ oleh\ pengguna.\r\n
+comment1.params=perintah\ kalimat2
+comment1.target=Command(java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getPerintah()
+comment3.params=
+comment3.target=java.lang.String\ getKalimat2()
+comment4.params=
+comment4.target=boolean\ isUnknown()
+comment4.text=\r\n\ @return\ true\ jika\ kata\ perintah\ (perintah)\ adalah\ null.\r\n
+comment5.params=
+comment5.target=boolean\ hasSecondWord()
+comment5.text=\r\n\ @return\ true\ jika\ perintah\ ini\ memiliki\ kata\ kedua\ (kalimat2\ tidak\ null).\r\n
+numComments=6

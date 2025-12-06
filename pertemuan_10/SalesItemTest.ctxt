@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=SalesItemTest
+comment1.params=
+comment1.target=SalesItemTest()
+comment2.params=
+comment2.target=void\ setUp()
+comment3.params=
+comment3.target=void\ testAddComment()
+comment4.params=
+comment4.target=void\ testInvalidRating()
+comment5.params=
+comment5.target=void\ testItemDetails()
+comment6.params=
+comment6.target=void\ tearDown()
+numComments=7

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=SalesItem
+comment1.params=name\ price
+comment1.target=SalesItem(java.lang.String,\ int)
+comment2.params=author\ text\ rating
+comment2.target=boolean\ addComment(java.lang.String,\ java.lang.String,\ int)
+comment3.params=
+comment3.target=void\ showInfo()
+comment4.params=
+comment4.target=int\ getCommentCount()
+comment5.params=
+comment5.target=java.lang.String\ getName()
+numComments=6

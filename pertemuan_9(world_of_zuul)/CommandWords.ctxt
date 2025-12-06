@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CommandWords
+comment0.text=\r\n\ Kelas\ ini\ menyimpan\ daftar\ semua\ kata\ perintah\ yang\ valid\ untuk\ permainan.\r\n
+comment1.params=commandString
+comment1.target=boolean\ isCommand(java.lang.String)
+comment1.text=\r\n\ Memeriksa\ apakah\ String\ yang\ diberikan\ adalah\ salah\ satu\ perintah\ yang\ valid.\r\n\ @param\ commandString\ Kata\ yang\ akan\ diperiksa.\r\n\ @return\ true\ jika\ kata\ tersebut\ valid,\ false\ sebaliknya.\r\n
+comment2.params=
+comment2.target=void\ showAll()
+comment2.text=\r\n\ Menampilkan\ semua\ perintah\ yang\ valid.\r\n
+numComments=3

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Truck
+comment1.params=model\ baseRate\ heavyDutyFee
+comment1.target=Truck(java.lang.String,\ double,\ double)
+comment2.params=rentalDays
+comment2.target=double\ calculateRentalCost(int)
+numComments=3

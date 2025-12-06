@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Ruangan
+comment0.text=\r\n\ Kelas\ Ruangan\ merepresentasikan\ satu\ lokasi\ dalam\ permainan.\r\n
+comment1.params=deskripsi
+comment1.target=Ruangan(java.lang.String)
+comment2.params=direction\ neighbor
+comment2.target=void\ setExit(java.lang.String,\ Ruangan)
+comment2.text=\r\n\ Menetapkan\ pintu\ keluar\ dari\ ruangan\ ini.\r\n\ @param\ direction\ Arah\ pintu\ keluar\ (e.g.,\ "utara",\ "timur").\r\n\ @param\ neighbor\ Ruangan\ yang\ dapat\ diakses\ melalui\ arah\ tersebut.\r\n
+comment3.params=
+comment3.target=java.lang.String\ getDeskripsi()
+comment3.text=\r\n\ @return\ Deskripsi\ pendek\ ruangan\ ini.\r\n
+comment4.params=direction
+comment4.target=Ruangan\ getExit(java.lang.String)
+comment4.text=\r\n\ Mengembalikan\ ruangan\ yang\ dijangkau\ jika\ kita\ pergi\ ke\ arah\ yang\ diberikan.\r\n\ @param\ direction\ Arah\ pintu\ keluar.\r\n\ @return\ Ruangan\ tujuan,\ atau\ null\ jika\ tidak\ ada\ pintu\ keluar\ di\ arah\ tersebut.\r\n
+comment5.params=
+comment5.target=java.lang.String\ getLongDescription()
+comment5.text=\r\n\ Mengembalikan\ deskripsi\ lengkap\ ruangan\ saat\ ini,\ termasuk\ pintu\ keluar.\r\n\ @return\ Deskripsi\ ruangan\ dan\ pintu-pintu\ keluar\ yang\ tersedia.\r\n
+comment6.params=
+comment6.target=java.lang.String\ getExitString()
+comment6.text=\r\n\ @return\ String\ yang\ mencantumkan\ semua\ pintu\ keluar.\r\n
+numComments=7

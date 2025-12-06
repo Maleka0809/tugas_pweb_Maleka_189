@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Parser
+comment0.text=\r\n\ Kelas\ Parser\ membaca\ masukan\ baris\ dari\ pengguna\ dan\ mencoba\ menginterpretasikannya\ \r\n\ sebagai\ perintah.\ Ini\ mengembalikan\ objek\ Command\ jika\ masukan\ valid.\r\n
+comment1.params=
+comment1.target=Parser()
+comment2.params=
+comment2.target=Command\ getCommand()
+comment2.text=\r\n\ @return\ Objek\ Command\ yang\ berisi\ perintah\ berikutnya\ dari\ pengguna.\r\n
+comment3.params=
+comment3.target=void\ showCommands()
+comment3.text=\r\n\ Menampilkan\ daftar\ semua\ perintah\ yang\ valid.\r\n
+numComments=4

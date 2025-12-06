@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Vehicle
+comment1.params=model\ baseRate
+comment1.target=Vehicle(java.lang.String,\ double)
+comment2.params=
+comment2.target=java.lang.String\ getModel()
+comment3.params=rentalDays
+comment3.target=double\ calculateRentalCost(int)
+numComments=4
