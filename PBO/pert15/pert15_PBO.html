@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="pert15_PBO.css">
+</head>
+<body>
+    <h2>FPDF</h2>
+
+<div class="isisemua">
+<p>Berikut adalah penjelasan detail baris demi baris dari kode yang sudah berhasil kamu jalankan.</p>
+
+    <h3>1. Bagian Import (Kotak Perkakas)</h3>
+    <div class="info-box">
+        <p>Posisi: Paling atas file. Kita memanggil alat-alat yang dibutuhkan sebelum bekerja.</p>
+        <div class="code-box">
+<span class="keyword">import</span> java.sql.*;
+<span class="keyword">import</span> java.util.Scanner;
+        </div>
+        <ul>
+            <li><strong>java.sql.*</strong>: Wajib ada! Isinya adalah alat untuk "ngobrol" dengan database (seperti <code>Connection</code>, <code>Statement</code>, <code>ResultSet</code>).</li>
+            <li><strong>Scanner</strong>: Alat untuk membaca input ketikan keyboard kamu.</li>
+        </ul>
+    </div>
+
+    <h3>2. Konfigurasi Database</h3>
+    <div class="info-box">
+        <p>Posisi: Di dalam class, sebelum main method. Ini adalah "alamat tujuan" agar Java tidak salah sambung.</p>
+        <div class="code-box">
+<span class="keyword">static final</span> String DB_URL = <span class="string">"jdbc:mysql://localhost:3306/bluej_crud"</span>;
+<span class="keyword">static final</span> String USER = <span class="string">"root"</span>;
+<span class="keyword">static final</span> String PASS = <span class="string">"Maleka_0809"</span>;
+        </div>
+        <ul>
+            <li><strong>DB_URL</strong>: Alamat lengkap database. 
+                <br><em>localhost</em> = komputer ini. 
+                <br><em>3306</em> = nomor port MySQL. 
+                <br><em>bluej_crud</em> = nama database di HeidiSQL.</li>
+            <li><strong>PASS</strong>: Password database kamu. (Ini bagian yang tadi bikin error karena sempat dikosongi).</li>
+        </ul>
+    </div>
+
+    <h3>3. Proses Koneksi (Jabat Tangan)</h3>
+    <div class="info-box">
+        <p>Posisi: Di dalam <code>public static void main</code>.</p>
+        <div class="code-box">
+<span class="comment">// 1. Panggil Driver</span>
+Class.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);
+
+<span class="comment">// 2. Login ke Database</span>
+conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        </div>
+        <p><strong>Penjelasan:</strong></p>
+        <ol>
+            <li><code>Class.forName</code>: Membangunkan file Library <code>.jar</code> (ikon cangkir kopi). Kalau file jar belum dimasukkan ke BlueJ, program mati di sini.</li>
+            <li><code>getConnection</code>: Java mengetuk pintu MySQL dengan Username dan Password yang kamu isi. Jika cocok, pintu terbuka.</li>
+        </ol>
+    </div>
+
+    <h3>4. Simpan Data (PreparedStatement)</h3>
+    <div class="info-box">
+        <p>Posisi: Di method <code>insertData</code>. Kenapa kita pakai tanda tanya <code>?</code></p>
+        <div class="code-box">
+String sql = <span class="string">"INSERT INTO mahasiswa (nama, nim) VALUES (?, ?)"</span>;
+PreparedStatement ps = conn.prepareStatement(sql);
+
+ps.setString(1, nama); <span class="comment">// Isi tanda tanya ke-1</span>
+ps.setString(2, nim);  <span class="comment">// Isi tanda tanya ke-2</span>
+
+ps.execute();
+        </div>
+        <ul>
+            <li>Teknik ini disebut <strong>PreparedStatement</strong>.</li>
+            <li>Tujuannya untuk <strong>Keamanan</strong> (mencegah hacker mengacak-acak database lewat form input).</li>
+            <li>Juga agar kode lebih rapi tanpa ribet dengan tanda kutip.</li>
+        </ul>
+    </div>
+
+    <h3>5. Tampilkan Data (ResultSet)</h3>
+    <div class="info-box">
+        <p>Posisi: Di method <code>showData</code>.</p>
+        <div class="code-box">
+<span class="keyword">while</span> (rs.next()) {
+    String nama = rs.getString(<span class="string">"nama"</span>);
+    System.out.println(nama);
+}
+        </div>
+        <ul>
+            <li><code>rs</code> (ResultSet) adalah tabel hasil tarikan data dari database.</li>
+            <li><code>rs.next()</code> bekerja seperti telunjuk jari:
+                <br>1. Tunjuk baris 1 -> Tampilkan.
+                <br>2. Cek baris 2 ada? -> Tunjuk -> Tampilkan.
+                <br>3. Terus berulang (looping) sampai data habis.
+            </li>
+        </ul>
+    </div>   
+    
+    <h3>Dokumen</h3>
+    <img class="gambar_1" src="menu.png" alt="gambar">
+    <br>
+    <img class="gambar_1" src="lihat_data.png" alt="gambar">
+
+    <button class="tombol_1"><a href="https://github.com/Maleka0809/tugas_absen_PBO/tree/main/pert_15">kode</a></button>
+    
+
+</div>
+</body>
+</html>

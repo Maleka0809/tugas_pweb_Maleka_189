@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pert11_pweb.css">
+</head>
+<body>
+    <h2>Laundry Crafty</h2>
+
+    <div class="isisemua">
+        <h3>Latar Belakang</h3>
+    <p>Pengelolaan data pada usaha jasa laundry seringkali mengalami kendala jika dilakukan secara manual, seperti risiko hilangnya nota, kesalahan perhitungan biaya, dan kesulitan dalam melacak status cucian pelanggan. Oleh karena itu, dibuatlah sistem informasi berbasis web ini.</p>
+
+    <h3>Tujuan</h3>
+    <ul>
+        <li>Mempermudah pencatatan transaksi laundry.</li>
+        <li>Mengelola data pelanggan dan layanan dengan rapi.</li>
+        <li>Menghitung total harga secara otomatis untuk mencegah kesalahan.</li>
+    </ul>
+
+    <h3>Teknologi</h3>
+    <ul>
+        <li>PHP Native (v8.x)</li>
+        <li>MySQL / MariaDB</li>
+        <li>Server Apache (XAMPP/Laragon)</li>
+        <li>Visual Studio Code</li>
+    </ul>
+
+    <br>
+
+    <h3 id="analisis">Analisis dan Perancangan</h3>
+
+    <h3>Fitur Utama</h3>
+    <ul>
+        <li><strong>Login Admin:</strong> Keamanan menggunakan hash password.</li>
+        <li><strong>Dashboard:</strong> Statistik ringkas pendapatan dan jumlah pelanggan.</li>
+        <li><strong>Transaksi:</strong> Input data cucian dan hitung otomatis.</li>
+        <li><strong>Laporan:</strong> Melihat rekap pendapatan.</li>
+    </ul>
+
+    <h3>Alur Kerja</h3>
+    <ol>
+        <li>Admin login ke sistem.</li>
+        <li>Admin menambahkan data pelanggan baru.</li>
+        <li>Admin membuat transaksi (memilih pelanggan & layanan).</li>
+        <li>Sistem menghitung total bayar.</li>
+        <li>Status cucian diupdate (Proses -> Selesai).</li>
+    </ol>
+
+    <br>
+
+    <h3 id="database">Struktur Database</h3>
+    <p>Nama Database: <strong>laundrycrafty</strong></p>
+
+    <h3>Tabel User (Admin)</h3>
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <thead>
+            <tr bgcolor="#eee">
+                <th>Kolom</th>
+                <th>Tipe Data</th>
+                <th>Fungsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>id_user</td>
+                <td>INT (Auto Increment)</td>
+                <td>ID Unik</td>
+            </tr>
+            <tr>
+                <td>username</td>
+                <td>VARCHAR(50)</td>
+                <td>Untuk Login</td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td>VARCHAR(255)</td>
+                <td>Password Terenkripsi</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tabel Transaksi</h3>
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <thead>
+            <tr bgcolor="#eee">
+                <th>Kolom</th>
+                <th>Tipe Data</th>
+                <th>Fungsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>id_transaksi</td>
+                <td>INT</td>
+                <td>ID Transaksi</td>
+            </tr>
+            <tr>
+                <td>nota</td>
+                <td>VARCHAR(50)</td>
+                <td>Kode Invoice</td>
+            </tr>
+            <tr>
+                <td>total_harga</td>
+                <td>DECIMAL</td>
+                <td>Total Biaya</td>
+            </tr>
+            <tr>
+                <td>status</td>
+                <td>ENUM</td>
+                <td>Status Pengerjaan</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h3 id="kode">Implementasi Kode</h3>
+
+    <h3>Koneksi Database (koneksi.php)</h3>
+    <pre>
+&lt;?php
+$host = "localhost";
+$user = "root";
+$pass = "Maleka_0809"; 
+$db   = "laundrycrafty";
+
+$koneksi = mysqli_connect($host, $user, $pass, $db);
+?&gt;
+    </pre>
+
+    <h3>Logika Login (auth_login.php)</h3>
+    <p>Kode ini memverifikasi password yang diinput dengan hash di database.</p>
+    <pre>
+if ($data && password_verify($password, $data['password'])) {
+    $_SESSION['user'] = $data;
+    header('Location: index.php');
+} else {
+    echo "Login Gagal";
+}
+    </pre>
+
+    <br>
+
+    <h3 id="tampilan">Tampilan Antarmuka</h3>
+    
+    <h3>Halaman Login</h3>
+    <img src="login.png" alt="Screenshot Login" width="500" border="1">
+    <br><br>
+
+    <h3>Halaman Dashboard</h3>
+    <img src="dashboard.png" alt="Screenshot Dashboard" width="500" border="1">
+    <br><br>
+
+    <h3>Halaman Transaksi</h3>
+    <img src="transaksi.png" alt="Screenshot Transaksi" width="500" border="1">
+    <img src="transaksi1.png" alt="Screenshot Transaksi" width="500" border="1">
+    <img src="transaksi2.png" alt="Screenshot Transaksi" width="500" border="1">
+
+
+    <br>
+
+    <h3 id="kesimpulan">Kesimpulan</h3>
+    <p>
+        Aplikasi LaundryCrafty telah berhasil dibuat dan berfungsi dengan baik. 
+        Sistem ini dapat membantu pemilik laundry dalam mencatat transaksi harian, 
+        mengelola data pelanggan, dan melihat laporan pendapatan tanpa perlu pencatatan manual.
+    </p>
+
+    <button class="tombol_1">
+<a href="https://github.com/Maleka0809/tugas_11_pweb">code</a>
+</button>
+
+    </div>
+    
+</body>
+</html>

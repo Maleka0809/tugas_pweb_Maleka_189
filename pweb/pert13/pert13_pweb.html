@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pert13_pweb.css">
+</head>
+<body>
+ <h2>Dokumentasi Sistem Manajemen User (CRUD)</h2>
+
+    <div class="isisemua">
+
+    <p>Berikut adalah penjelasan detail mengenai cara kerja setiap file dalam sistem manajemen user yang telah dibuat.</p>
+
+    <div class="file-box">
+        <h3>1. <span class="filename">koneksi.php</span> (Jantung Aplikasi)</h3>
+        <p>File ini adalah jembatan antara kode PHP dan Database MySQL.</p>
+        <ul>
+            <li><strong>Fungsi Utama:</strong> Menggunakan fungsi <code>mysqli_connect()</code> untuk membuka jalur komunikasi.</li>
+            <li><strong>Parameter:</strong> Membutuhkan 4 hal: <em>Host</em> (localhost), <em>User database</em> (root), <em>Password database</em> (kosong), dan <em>Nama Database</em>.</li>
+            <li><strong>Penting:</strong> File ini di-<em>include</em> di setiap halaman lain agar tidak perlu menulis ulang kode koneksi berulang kali.</li>
+        </ul>
+    </div>
+
+    <div class="file-box">
+        <h3>2. <span class="filename">index.php</span> (Menampilkan Data / READ)</h3>
+        <p>Halaman utama yang dilihat pengguna.</p>
+        <ul>
+            <li><strong>Query:</strong> Menggunakan <code>SELECT * FROM users</code> untuk mengambil semua data.</li>
+            <li><strong>Looping (Perulangan):</strong> Menggunakan <code>while</code> dan <code>mysqli_fetch_assoc()</code>. Ini artinya: "Selama masih ada data di database, ambil satu baris, tampilkan, lalu ulangi untuk baris berikutnya."</li>
+            <li><strong>Keamanan Tampilan:</strong> Menggunakan <code>htmlspecialchars()</code> saat menampilkan nama/username. Ini mencegah hacker menyisipkan skrip berbahaya (XSS) ke dalam nama user.</li>
+        </ul>
+    </div>
+
+    <div class="file-box">
+        <h3>3. <span class="filename">tambah.php</span> (Membuat Data / CREATE)</h3>
+        <p>Formulir untuk memasukkan user baru.</p>
+        <ul>
+            <li><strong>Deteksi Tombol:</strong> Menggunakan <code>if(isset($_POST['simpan']))</code> untuk mengecek apakah tombol "Simpan" sudah ditekan.</li>
+            <li><strong>Keamanan Password:</strong> <br>
+                <div class="concept">
+                    <strong>Penting:</strong> Kita menggunakan <code>password_hash($pass, PASSWORD_DEFAULT)</code>.
+                    <br>Fungsi ini mengubah password asli (misal: "rahasia") menjadi kode acak panjang. Jika database bocor, password asli user tetap aman dan tidak bisa dibaca.
+                </div>
+            </li>
+            <li><strong>Query:</strong> Menggunakan perintah SQL <code>INSERT INTO</code>.</li>
+        </ul>
+    </div>
+
+    <div class="file-box">
+        <h3>4. <span class="filename">edit.php</span> (Mengubah Data / UPDATE)</h3>
+        <p>Halaman ini sedikit lebih kompleks karena memiliki dua logika untuk password.</p>
+        <ul>
+            <li><strong>Mengambil Data Lama:</strong> Sebelum form muncul, script mengambil data berdasarkan <code>id</code> di URL agar kolom input terisi data lama.</li>
+            <li><strong>Logika Cerdas Password:</strong>
+                <ul>
+                    <li>Jika kolom password <strong>diisi</strong>: Update nama, username, DAN password baru (yang di-hash ulang).</li>
+                    <li>Jika kolom password <strong>kosong</strong>: Hanya update nama dan username. Password lama di database tidak diganggu.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="file-box">
+        <h3>5. <span class="filename">hapus.php</span> (Menghapus Data / DELETE)</h3>
+        <p>File ini tidak memiliki tampilan (UI), hanya berfungsi memproses perintah.</p>
+        <ul>
+            <li><strong>Ambil ID:</strong> Menangkap ID dari URL (misal: <code>hapus.php?id=5</code>).</li>
+            <li><strong>Eksekusi:</strong> Menjalankan perintah SQL <code>DELETE FROM users WHERE id='...'</code>.</li>
+            <li><strong>Redirect:</strong> Setelah dihapus, user langsung "dilempar" kembali ke <code>index.php</code> menggunakan JavaScript <code>window.location</code>.</li>
+        </ul>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; font-size: 0.8em; color: #777;">
+        <p>Dibuat sebagai panduan belajar PHP Native & MySQL</p>
+    </footer>
+
+    <h3>Dokumentasi</h3>
+        <img class="gambar_1" src="dashboard.png">
+    <br>
+    <img class="gambar_1" src="form.png">
+    <br>
+    <img class="gambar_1" src="manajemen.png">
+
+
+
+
+
+    <button class="tombol_1">
+<a href="https://github.com/Maleka0809/latihan_13_pweb">code</a>
+</button>
+    </div>
+    
+</body>
+</html>

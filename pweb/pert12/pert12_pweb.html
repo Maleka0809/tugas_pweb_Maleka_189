@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pert12_pweb.css">
+</head>
+<body>
+    
+    <h2>Upload Foto</h2>
+    <div class="isisemua">
+        
+    <p>Dokumen ini menjelaskan bagaimana sistem yang baru saja kita buat bekerja di belakang layar, dari user memilih foto hingga tampil di website.</p>
+
+    <h3>1. Konsep Paling Penting</h3>
+    <div class="concept-box">
+        <strong>Pahamilah perbedaan lokasi penyimpanan:</strong>
+        <p>Kita <u>tidak</u> menyimpan fisik gambar di dalam Database.</p>
+        <ul>
+            <li><strong>Folder (Windows Explorer):</strong> Tempat menyimpan <strong>fisik file</strong> gambar (jpg/png).</li>
+            <li><strong>Database (MySQL):</strong> Hanya menyimpan <strong>TEKS nama filenya</strong> saja (contoh: <code>foto_budi.jpg</code>).</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h3>2. Alur Perjalanan Data (Step-by-Step)</h3>
+    <p>Bayangkan alurnya seperti mengirim paket. Berikut adalah tahapan yang terjadi:</p>
+
+    <div class="step">
+        <h3>Tahap A: Di Halaman Form (User)</h3>
+        <p>Saat user mengisi form dan menekan tombol Simpan:</p>
+        <ul>
+            <li>Browser membungkus data teks (NIS, Nama) dan file fisik (Foto).</li>
+            <li><strong>Penting:</strong> Atribut <code>enctype="multipart/form-data"</code> pada form berfungsi sebagai "amplop khusus". Tanpa kode ini, browser hanya mengirim nama filenya saja, sedangkan fotonya tertinggal di komputer user.</li>
+        </ul>
+    </div>
+
+    <div class="step">
+        <h3>Tahap B: Masuk ke Server (PHP)</h3>
+        <p>Ini adalah bagian tersibuk di file <code>proses_upload.php</code>:</p>
+        <ol>
+            <li><strong>Parkir Sementara:</strong> PHP tidak langsung menaruh foto di folder tujuan. Foto "parkir" dulu di folder sementara (Temporary) milik XAMPP dengan nama acak (misal: <code>phpA123.tmp</code>).</li>
+            <li><strong>Validasi:</strong> Script mengecek apakah ada file yang dikirim dan apakah ada error.</li>
+            <li><strong>Pemindahan (Kunci Utama):</strong> Kita menggunakan perintah <code>move_uploaded_file()</code>.
+                <br>Logikanya: <em>"Ambil file dari parkiran sementara, pindahkan ke folder <code>images/</code>, dan beri nama baru."</em>
+            </li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h3>Tahap C: Pencatatan (Database)</h3>
+        <p>Setelah file fisik aman tersimpan di folder laptop/server, barulah PHP melapor ke MySQL:</p>
+        <p><em>"Halo Database, tolong catat ya: Siswa bernama Budi punya foto dengan nama file <code>18273_budi.jpg</code>."</em></p>
+    </div>
+
+    <div class="step">
+        <h3>Tahap D: Menampilkan Kembali</h3>
+        <p>Saat kita membuka halaman daftar siswa:</p>
+        <ul>
+            <li>PHP bertanya ke Database: <em>"Apa nama file fotonya Budi?"</em></li>
+            <li>Database menjawab: <em>"Namanya <code>18273_budi.jpg</code>"</em>.</li>
+            <li>PHP menyusun HTML: <code>&lt;img src="images/18273_budi.jpg"&gt;</code>.</li>
+            <li>Browser menampilkan gambar tersebut yang diambil dari folder.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h3>3. Mengapa Tadi Sempat Error?</h3>
+    <p>Berdasarkan kendala yang dialami sebelumnya, berikut penyebab umumnya:</p>
+    <ul>
+        <li><strong>Folder Tidak Ada:</strong> PHP (secara default) tidak bisa membuat folder otomatis. Jika folder <code>images</code> belum dibuat manual, PHP bingung mau menaruh file di mana.</li>
+        <li><strong>Izin Akses (Permissions):</strong> Kadang folder ada tapi terkunci (Read-only), sehingga PHP dilarang menulis file di situ.</li>
+        <li><strong>Ukuran File:</strong> XAMPP memiliki batasan default (biasanya 2MB). Jika foto dari HP ukurannya 5MB, server akan menolak otomatis sebelum kode PHP dijalankan.</li>
+    </ul>
+
+
+    <br>
+    <center>
+        <small>Dibuat untuk tujuan pembelajaran logika pemrograman web dasar.</small>
+    </center>
+    </div>
+    <h3>Dokumentasi</h3>
+
+    <img class="gambar_1" src="register.png">
+    <br>
+    <img class="gambar_1" src="dashboard.png">
+    <br>
+    <img class="gambar_1" src="form.png">
+    <br>
+    <img class="gambar_1" src="after.png">
+
+
+
+
+
+
+    <button class="tombol_1">
+<a href="https://github.com/Maleka0809/tugas_11_pweb">code</a>
+</button>
+
+    
+</body>
+</html>

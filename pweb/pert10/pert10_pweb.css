@@ -1,0 +1,88 @@
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12pt;
+}
+
+body {
+    background-color: rgb(28, 27, 27);
+    color: white; 
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: rgb(246, 255, 0);
+    font-weight: bold;
+    text-align: center;
+    text-shadow:  
+     -2px -2px 0 rgb(0, 0, 0),
+      2px -2px 0 rgb(0, 0, 0),
+     -2px  2px 0 rgb(0, 0, 0),
+      2px  2px 0 rgb(0, 0, 0);
+}
+
+.judul {
+    text-align: center;
+    margin: 10px auto;
+    background-color: rgb(16, 11, 155);
+    padding: 5px;
+    border-radius: 8px;
+}
+
+form {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.tombol_1 {
+    background-color: rgb(251, 255, 0) ;
+    width: 170px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 10px;
+    color: yellow;
+    font-size: 16pt;
+    font-family: Verdana, Arial, sans-serif;
+    font-weight: 800;
+    border: none;
+    display: block;
+}
+
+.isi {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.gambar_1 {
+    max-width: 60%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+ol {
+    color: aliceblue;
+    text-align: justify;
+    padding-left: 30px;
+}
+
+ol li img {
+    max-height: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
+.identitaspenulis {
+    text-align: center;
+    margin: 10px auto;
+    color: cadetblue;
+}
+
+.isisemua {
+    background-color: rgb(54, 54, 54);
+    text-align: justify;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+}
